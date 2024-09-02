@@ -1,8 +1,16 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import joblib  # To load the trained model
+import sklearn
+import joblib
+import xgboost
 import traceback
+
+print(f"pandas version: {pd.__version__}")
+print(f"numpy version: {np.__version__}")
+print(f"scikit-learn version: {sklearn.__version__}")
+print(f"joblib version: {joblib.__version__}")
+print(f"xgboost version: {xgboost.__version__}")
 
 
 # Load the model (replace 'your_model.pkl' with your actual model file)

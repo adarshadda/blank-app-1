@@ -2,9 +2,18 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import joblib  # To load the trained model
+import traceback
+
 
 # Load the model (replace 'your_model.pkl' with your actual model file)
-model = joblib.load('my_model.joblib')
+try:
+    model = joblib.load('my_model.joblib')
+    st.success("Model loaded successfully!")
+except Exception as e:
+    st.error(f"Error loading the model: {str(e)}")
+    st.text("Traceback:")
+    st.text(traceback.format_exc())
+    st.stop()
 
 # Label mapping for prediction output
 label_mapping = {

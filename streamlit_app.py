@@ -1,28 +1,34 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import sklearn
 import joblib
-import xgboost
 import traceback
+import sys
 
-print(f"pandas version: {pd.__version__}")
-print(f"numpy version: {np.__version__}")
-print(f"scikit-learn version: {sklearn.__version__}")
-print(f"joblib version: {joblib.__version__}")
-print(f"xgboost version: {xgboost.__version__}")
+# Set up logging
+import logging
+logging.basicConfig(level=logging.INFO)
 
-
-# Load the model (replace 'your_model.pkl' with your actual model file)
+# Load the model with error handling
 try:
-    model = joblib.load('my_model.joblib')
+    st.info("Attempting to load the model...")
+    model = joblib.load('my_model_kaggle.joblib')
     st.success("Model loaded successfully!")
 except Exception as e:
     st.error(f"Error loading the model: {str(e)}")
     st.text("Traceback:")
     st.text(traceback.format_exc())
+    
+    # Log the error
+    logging.error(f"Failed to load model: {str(e)}")
+    logging.error(traceback.format_exc())
+    
+    # Print Python version and installed packages
+    st.text(f"Python version: {sys.version}")
+    st.text("Installed packages:")
+    st.text("\n".join(f"{pkg.key}=={pkg.version}" for pkg in joblib.externals.packaging.get_installed_distributions()))
+    
     st.stop()
-
 # Label mapping for prediction output
 label_mapping = {
     0: 'Normal_Weight',

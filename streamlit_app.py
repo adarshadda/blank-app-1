@@ -4,7 +4,7 @@ import numpy as np
 import joblib  # To load the trained model
 
 # Load the model (replace 'your_model.pkl' with your actual model file)
-model = joblib.load('your_model.pkl')
+model = joblib.load('my_model.joblib')
 
 # Label mapping for prediction output
 label_mapping = {
